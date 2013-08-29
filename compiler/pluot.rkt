@@ -426,3 +426,19 @@
          ""
          (map token->string
               (parse str))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                                Executable interface
+
+(define (executable-interface process)
+  (let ((argv (current-command-line-arguments)))
+    (cond
+      [(= 0 (vector-length argv))
+       (process (port->string (current-input-port)))]
+      [else
+       (vector-map (lambda (path)
+                     (process (file->string path)))
+                   argv)])
+    (void)))
+
+(executable-interface (lambda (str) 
+                        (display (compile str))))
