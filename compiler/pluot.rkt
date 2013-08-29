@@ -326,7 +326,7 @@
                                       str
                                       indents)))]
                [else
-                (error "Syntax error: inconsistent indentation.")]))
+                (raise-user-error "Syntax error: inconsistent indentation.")]))
            (iter str indents)]
           [else
            (error "Logic failed.")])))
