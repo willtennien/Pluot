@@ -2,6 +2,15 @@
 (require racket/match)
 (require racket/list)
 
+
+
+
+
+
+
+
+;;;;;;;;;;;;;;;;                Personal Library
+
 (define-syntax-rule (list-contents xs f)
   (apply (lambda . f) xs))
 
@@ -52,6 +61,36 @@
      xs]))
 
 (define isnt-a? (compose not is-a?))
+
+
+
+
+
+
+
+
+;;;;;;;;;;;;;;;;                Language Definitions
+
+(define macros
+"#define true 1
+#define false 0
+#define not !
+#define or ||
+#define and &&
+#define is ==
+#define isnt !=
+#define unless(bool) if (not (bool))
+#define until(bool) if (not (bool))
+")
+
+
+
+
+
+
+
+
+;;;;;;;;;;;;;;;;                Syntax Tokens
 
 (define (tokens-are? tokens klasses)
   (cond 
@@ -197,19 +236,6 @@
 (define (token-except-newline? token)
      (isnt-a? token
               token-newline%))
-                                
-
-;(define-syntax-rule (define-token-keyword name keyword)
-;  (begin (struct name token-keyword () #:transparent #:constructor-name foo)
-;         (define (bar)
-;            (foo keyword))))
-
-;(define-token-keyword token-if "if")
-;(define-token-keyword token-else "else")
-;(define-token-keyword token-until "until")
-;(define-token-keyword token-unless "unless")
-;(define-token-keyword token-while "while")
-;(define-token-keyword token-for "for")
 
 
 
@@ -218,9 +244,7 @@
 
 
 
-
-
-
+;;;;;;;;;;;;;;;;                Compiler
 
 (define-syntax-rule (define-patterns name 
                       (args body 
@@ -427,18 +451,35 @@
          (map token->string
               (parse str))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;                                Executable interface
+(define (compile-with-macros str)
+  (string-append macros
+                 "\n"
+                 (compile str)))
+  
+
+
+
+
+
+
+
+;;;;;;;;;;;;;;;;                Executable Interface
 
 (define (executable-interface process)
   (let ((argv (current-command-line-arguments)))
     (cond
       [(= 0 (vector-length argv))
-       (process (port->string (current-input-port)))]
+       (process (list (port->string (current-input-port))))]
       [else
-       (vector-map (lambda (path)
-                     (process (file->string path)))
-                   argv)])
+       (process (vector->list (vector-map (lambda (path)
+                                            (file->string path))
+                                          argv)))])
     (void)))
 
-(executable-interface (lambda (str) 
-                        (display (compile str))))
+(executable-interface (lambda (sources)
+                        (display (compile-with-macros (foldl (lambda (a b) 
+                                                               (string-append b 
+                                                                              "\n"
+                                                                              a))
+                                                             ""
+                                                             sources)))))
