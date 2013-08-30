@@ -57,10 +57,10 @@ int unacceptable(int j)
     return j == 18 || j % 2 == 0;
 }
 
-int i = 1;
-
 void main()
 {
+    int i = 1;
+
     while (!(100 &gt;= ++i))
     {
         if (! unacceptable(i))
