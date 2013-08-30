@@ -1,9 +1,7 @@
 Pluot
 =====
 
-A tiny language that compiles into C
-
-Pluot is C with a Python-like syntax. 
+Pluot is a tiny language that compiles into C. It allows you to write C with a Python-like syntax.
 
 Pluot frees you from semicolon-itis by assigning meaning to newlines:
 
