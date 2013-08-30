@@ -7,11 +7,11 @@ Pluot is C with a Python-like syntax.
 
 Pluot frees you from semicolon-itis by assigning meaning to newlines:
 
-<code><pre>int i = 0
+<pre><code>int i = 0
 
 printf("Hello there.\n")
 
-unleash(penguins)</pre></code>
+unleash(penguins)</code></pre>
 
 becomes
 
@@ -27,6 +27,8 @@ Pluot eliminates C's curly braces with a cleaner, Python-style indentation:
 while ++i &lt; 10
     if radiationInTankNo(i)
         printf("Plutonium found in tank number %d.\n", i)</code></pre>
+
+becomes
 
 <pre><code>int i = 0;
 while (++i &lt; 10)
@@ -51,6 +53,8 @@ void main()
         else
             printf("No way.\n")</code></pre>
 
+becomes
+
 <pre><code>
 int unacceptable(int j)
 {
@@ -63,7 +67,7 @@ void main()
 
     while (!(100 &gt;= ++i))
     {
-        if (! unacceptable(i))
+        if (!(unacceptable(i)))
         {
             printf("%d\n", i);
         }
