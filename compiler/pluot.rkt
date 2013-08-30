@@ -382,23 +382,27 @@
                token-unless%)
         (append (list (token-if)
                       (token-paren-open)
-                      (token-other "! "))
+                      (token-other "! ")
+                      (token-paren-open))
                 (takef token-except-newline? 
                        (cdr tokens))
-                (cons (token-paren-close)
-                      (transform (dropf token-except-newline? 
-                                        tokens)))))]
+                (list (token-paren-close)
+                      (token-paren-close))
+                (transform (dropf token-except-newline? 
+                                  tokens))))]
   [(tokens)
    (and (is-a? (car tokens)
                token-until%)
         (append (list (token-while)
                       (token-paren-open)
-                      (token-other "! "))
+                      (token-other "! ")
+                      (token-paren-open))
                 (takef token-except-newline? 
                        (cdr tokens))
-                (cons (token-paren-close)
-                      (transform (dropf token-except-newline? 
-                                        tokens)))))]
+                (list (token-paren-close)
+                      (token-paren-close))
+                (transform (dropf token-except-newline? 
+                                  tokens))))]
   [(tokens)
    (and (token-keyword-positive? (car tokens))
         (append (list (car tokens)
