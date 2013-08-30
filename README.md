@@ -15,31 +15,31 @@ unleash(penguins)</pre></code>
 
 becomes
 
-<code><pre>int i = 0;
+<pre><code>int i = 0;
 
 printf("Hello there.\n");
 
-unleash(penguins);</pre></code>
+unleash(penguins);</code></pre>
 
 Pluot eliminates C's curly braces with a cleaner, Python-style indentation:
 
-<code><pre>int i = 0
-while ++i < 10
+<pre><code>int i = 0
+while ++i &lt; 10
     if radiationInTankNo(i)
-        printf("Plutonium found in tank number %d.\n", i)</pre></code>
+        printf("Plutonium found in tank number %d.\n", i)</code></pre>
 
-<code><pre>int i = 0;
+<pre><code>int i = 0;
 while (++i &lt; 10)
 {
     if (radiationInTankNo(i))
     {
         printf("Plutonium found in tank number %d.\n", i);
     }
-}</pre></code>
+}</code></pre>
 
-Pluot uses the power of the English language to make your code more readable by allowing you to use English operators and constructs.
+Pluot leverages the power of the English language to make your code more readable by allowing you to use English operators and constructs.
 
-<code><pre>int unacceptable(int j)
+<pre><code>int unacceptable(int j)
     return j is 18 or j % 2 is 0
 
 void main()
@@ -49,9 +49,9 @@ void main()
         unless unacceptable(i)
             printf("%d\n", i)
         else
-            printf("No way.\n")</pre></code>
+            printf("No way.\n")</code></pre>
 
-<code><pre>
+<pre><code>
 int unacceptable(int j)
 {
     return j == 18 || j % 2 == 0;
@@ -72,6 +72,6 @@ void main()
             printf("No way.\n");
         }
     }
-}</pre></code>
+}</code></pre>
 
 
